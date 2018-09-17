@@ -1,0 +1,39 @@
+---
+title: "Tarea 1: RMarkdown"
+author: "Emiliano Alvarez"
+fontsize: 11pt
+geometry: margin=3cm
+output:
+  pdf_document:
+    toc: false
+    number_sections: true
+---
+
+```{r setup, include= FALSE, echo=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(knitr)
+library(xtable)
+```
+# Introducción
+
+```{r CH1, echo=TRUE}
+N= rpois(1,90)
+X= runif(N)
+Y= runif(N)
+dat= data.frame(X,Y)
+```
+
+
+# Simulaciones y tabla
+```{r tabla, echo=FALSE, warning=FALSE, results='asis'}
+x=summary(dat)
+t=xtable(x, caption = "Estadísticos descriptivos", digits = 2)
+print(xtable(x, caption = "Estadísticos descriptivos", digits = 2), 
+      table.placement = "h!", caption.placement = "top")
+```
+En la Tabla \@ref(tab:r tabla)  se observa que la mediana de las X es `r median(dat[,1])`
+
+# Figura
+```{r plot, echo=FALSE, fig.cap="Gráfico de dispersión X-Y",out.width = '50%',fig.align='center'}
+plot(X,Y) 
+```
